@@ -1,9 +1,11 @@
 import React from 'react';
 import Logo from '../../assets/Logo.png';
-import './Header.sass';
+import cl from './Header.module.sass';
+import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { BiMap } from 'react-icons/bi';
 import Points from '../../assets/icons/PointsImg.png';
+import { LoginModule } from '../LoginModule/LoginModule';
 
 type Props = {
 	pathname: string;
@@ -12,46 +14,49 @@ type Props = {
 export const Header: React.FC<Props> = ({ pathname }) => {
 
 	return (
-		<header className="header">
-			<div className='container header__wrap'>
-				<div className="header__left">
-					<div className="header__logo">
+		<header className={cl.header}>
+			<div className={classNames(cl.container, cl.header__wrap)}>
+				<div className={cl.header__left}>
+					<div className={cl.header__logo}>
 						<img src={Logo} alt="" />
 					</div>
-					<nav className="header__nav">
+					<nav className={cl.header__nav}>
 						<ul>
-							<li className={`active-link ${pathname === '/' ? 'active' : ''}`}>
+							{/* <li className={`cl.active-link ${pathname === '/' ? 'active' : ''}`}> */}
+							<li className={classNames(cl.active_link, pathname === '/' ? cl.active : null)}>
 								<Link to="/">Главная</Link>
 							</li>
-							<li className={`active-link ${pathname === '/points' ? 'active' : ''}`}>
+							<li className={classNames(cl.active_link, pathname === '/points' ? cl.active : null)}>
 								<Link to="/points">Пункты сбора</Link>
 							</li>
-							<li className={`active-link ${pathname === '/market' ? 'active' : ''}`}>
+							<li className={classNames(cl.active_link, pathname === '/market' ? cl.active : null)}>
 								<Link to="/market">ЭкоМаркет</Link>
 							</li>
-							<li className={`active-link ${pathname === '/service' ? 'active' : ''}`}>
+							<li className={classNames(cl.active_link, pathname === '/service' ? cl.active : null)}>
 								<Link to="/service">О сервисе</Link>
 							</li>
-
 						</ul>
 					</nav>
 				</div>
-				<div className="header__right">
-					<div className="header__right__location">
-						<BiMap className='header__right__icon' />
-						<p>Kazan</p>
-					</div>
-					<div className="header__right__points">
-						<img src={Points} alt="" />
-						<p>1000</p>
-					</div>
-					<div className="header__right__user">
-						<div className="header__right__user__avatar"> </div>
-						<p>Алексей</p>
-					</div>
+				<div className={cl.header__right}>
+					{localStorage.getItem('auth_token') ? <>
+						<div className={cl.header__right__location}>
+							<BiMap className={cl.header__right__icon} />
+							<p>Kazan</p>
+						</div>
+						<div className={cl.header__right__points}>
+							<img src={Points} alt="" />
+							<p>1000</p>
+						</div>
+						<div className={cl.header__right__user}>
+							<div className={cl.header__right__user__avatar}> </div>
+							<p>Алексей</p>
+						</div>
+					</> : <LoginModule />}
+
 				</div>
-			</div>
-		</header>
+			</div >
+		</header >
 	)
 }
 

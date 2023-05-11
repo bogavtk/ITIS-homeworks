@@ -5,6 +5,7 @@ import { Home } from './pages/Home/Home';
 import Layout from './pages/Layout/Layout';
 import { Market } from './pages/Market/Market';
 import { Missing } from './pages/Missing/Missing';
+import { RequireAuth } from './components/RequireAuth/RequireAuth';
 
 const ROUTES = {
 	home: () => '/',
@@ -20,6 +21,11 @@ export const router = createBrowserRouter(
 			<Route path={ROUTES.points()} element={<CollectionPoints />} />
 			<Route path={ROUTES.market()} element={<Market />} />
 			<Route path={ROUTES.service()} element={<AboutService />} />
+
+			<Route element={<RequireAuth />} >
+
+			</Route>
+
 			<Route path='*' element={<Missing />} />
 		</Route>
 
