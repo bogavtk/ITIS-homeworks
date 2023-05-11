@@ -5,33 +5,32 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import SwiperCore, { Pagination, Navigation } from 'swiper';
+import { Banner1 } from '../Banners/Banner1/Banner1';
+import { Banner2 } from '../Banners/Banner2/Banner2';
+import { Banner3 } from '../Banners/Banner3/Banner3';
 
 SwiperCore.use([Pagination, Navigation]);
 
 export const HomeSwiper: React.FC = () => {
 	return (
-		<Swiper
-			slidesPerView={1}
-			spaceBetween={10}
-			centeredSlides={true}
-			navigation={true}
-			loop={true}
-		>
-			<SwiperSlide>
-				<img src="" alt="" />
-			</SwiperSlide>
-			<SwiperSlide>
-				<div>Item 2</div>
-			</SwiperSlide>
-			<SwiperSlide>
-				<div>Item 3</div>
-			</SwiperSlide>
-			<SwiperSlide>
-				<div>Item 4</div>
-			</SwiperSlide>
-			<SwiperSlide>
-				<div>Item 5</div>
-			</SwiperSlide>
-		</Swiper>
+		<div className={cl.main_wrapper}>
+			<Swiper
+				slidesPerView={1}
+				spaceBetween={10}
+				centeredSlides={true}
+				navigation={false}
+				loop={true}
+			>
+				<SwiperSlide>
+					<Banner1 />
+				</SwiperSlide>
+				<SwiperSlide>
+					<Banner2 />
+				</SwiperSlide>
+				<SwiperSlide>
+					<Banner3 />
+				</SwiperSlide>
+			</Swiper>
+		</div>
 	)
 }

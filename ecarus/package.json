@@ -26,7 +26,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "svg": "node ./generate-svg.js",
+    "schema": "openapi -i https://ecoapp.cloud.technokratos.com/v3/api-docs -o src/models/generated --exportCore false --exportServices false"
   },
   "eslintConfig": {
     "extends": [

@@ -6,14 +6,13 @@ import axios from '../../api/axios';
 import { LightButton } from '../LightButton/LightButton';
 import { CrossIcon } from '../../assets/icons/icons';
 import { Link } from 'react-router-dom';
-import { PartnerLogin } from '../PartnerLogin/PartnerLogin';
 
 
 Modal.setAppElement('#root');
 
 const SEND_LOGIN = 'login';
 
-export const LoginModule: React.FC = () => {
+export const LoginAndReg: React.FC = () => {
 
 	const overlayStyles: CSSProperties = {
 		backgroundColor: 'rgba(0, 0, 0, 0.4)',
@@ -58,10 +57,9 @@ export const LoginModule: React.FC = () => {
 				onRequestClose={handleClose}
 				style={{ overlay: overlayStyles, content: contentStyles }}
 				contentLabel="Login Modal"
-				className={cl.modal}
 			>
 				<div className={cl.modal_header}>
-					<h2>Вход</h2>
+					<h2>Вход или Регистрация</h2>
 					<button className={cl.button_close} onClick={handleClose}>
 						<CrossIcon width={18} height={18} fill="#000B26" fillOpacity={0.72} />
 					</button>
@@ -90,9 +88,8 @@ export const LoginModule: React.FC = () => {
 					<Link to="/reg">Регистрация</Link>
 				</div>
 				<div onClick={handleClose}>
-					<PartnerLogin />
+					<LightButton onClick={handleSubmit} text="Вход для партнеров" />
 				</div>
-
 			</Modal>
 		</>
 	);

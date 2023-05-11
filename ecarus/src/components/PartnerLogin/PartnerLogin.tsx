@@ -1,19 +1,18 @@
 import React, { useState, CSSProperties } from 'react';
-import cl from './LoginModule.module.sass';
+import cl from './PartnerLogin.module.sass';
 import Modal from 'react-modal';
 import { SubmitButton } from '../SubmitButton/SubmitButton';
 import axios from '../../api/axios';
 import { LightButton } from '../LightButton/LightButton';
 import { CrossIcon } from '../../assets/icons/icons';
 import { Link } from 'react-router-dom';
-import { PartnerLogin } from '../PartnerLogin/PartnerLogin';
 
 
 Modal.setAppElement('#root');
 
 const SEND_LOGIN = 'login';
 
-export const LoginModule: React.FC = () => {
+export const PartnerLogin: React.FC = () => {
 
 	const overlayStyles: CSSProperties = {
 		backgroundColor: 'rgba(0, 0, 0, 0.4)',
@@ -32,7 +31,7 @@ export const LoginModule: React.FC = () => {
 	};
 
 	const [isOpen, setIsOpen] = useState(false);
-	const [phone, setPhone] = useState<string>('');
+	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 
 	const handleClose = () => {
@@ -41,7 +40,7 @@ export const LoginModule: React.FC = () => {
 
 	const handleSubmit = async () => {
 		try {
-			const response = await axios.post(SEND_LOGIN, { login: phone, password: password });
+			const response = await axios.post(SEND_LOGIN, { login: email, password: password });
 			console.log(response?.data);
 		} catch (err: any) {
 			console.log(err.message);
@@ -51,17 +50,16 @@ export const LoginModule: React.FC = () => {
 	return (
 		<>
 			<div className={cl.enter_button_wrap}>
-				<button className={cl.enter_button} onClick={() => setIsOpen(true)}>Войти</button>
+				<button className={cl.enter_button} onClick={() => setIsOpen(true)}>Вход для партнеров</button>
 			</div>
 			<Modal
 				isOpen={isOpen}
 				onRequestClose={handleClose}
 				style={{ overlay: overlayStyles, content: contentStyles }}
 				contentLabel="Login Modal"
-				className={cl.modal}
 			>
 				<div className={cl.modal_header}>
-					<h2>Вход</h2>
+					<h2>Вход или Регистрация</h2>
 					<button className={cl.button_close} onClick={handleClose}>
 						<CrossIcon width={18} height={18} fill="#000B26" fillOpacity={0.72} />
 					</button>
@@ -69,11 +67,11 @@ export const LoginModule: React.FC = () => {
 				<form className={cl.modal_form}>
 					<label htmlFor="phone">
 						<input
-							type="tel"
-							name='phone'
-							placeholder='Телефон'
-							onChange={(e) => setPhone(e.target.value)}
-							value={phone}
+							type="mail"
+							name='email'
+							placeholder='Email'
+							onChange={(e) => setEmail(e.target.value)}
+							value={email}
 						/>
 					</label>
 					<label htmlFor="password">
@@ -90,9 +88,8 @@ export const LoginModule: React.FC = () => {
 					<Link to="/reg">Регистрация</Link>
 				</div>
 				<div onClick={handleClose}>
-					<PartnerLogin />
+					<LightButton onClick={handleSubmit} text="Вход для партнеров" />
 				</div>
-
 			</Modal>
 		</>
 	);
